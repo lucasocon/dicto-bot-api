@@ -11,6 +11,15 @@ class Client
 
   def call(term)
     response = HTTParty.get("#{BASE_URL}term=#{term}")
-    response['list'].map { |result| result['definition'] }
+    definition = response['list'].map { |result| result['definition'] }
+    {
+      "response_type": "in_channel",
+      "text": definition,
+      "attachments": [
+          {
+              "text": definition
+          }
+      ]
+    }
   end
 end
