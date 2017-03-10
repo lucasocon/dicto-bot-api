@@ -11,14 +11,24 @@ class Client
 
   def call(term)
     response = HTTParty.get("#{BASE_URL}term=#{term}")
-    definition = response['list'].map { |result| result['definition'] }
+    definitions = response['list'].map { |result| result['definition'] }
+    text = ''
+    definitions.each { |definition| text << "#{definition} \n\n" }
+    json_response text
+  end
+
+  private
+
+  def json_response(text)
     {
-      "response_type": "in_channel",
-      "text": "It's 80 degrees right now.",
-      "attachments": [
-          {
-              "text":"Partly cloudy today and tomorrow"
-          }
+      response_type: 'in_channel',
+      text: "That's we found...",
+      attachments: [
+        {
+          text: text,
+          color: '#36a64f',
+					thumb_url: 'http://i0.kym-cdn.com/entries/icons/original/000/016/956/10042483-funny-robot-sit-with-headphones.jpg'
+        }
       ]
     }
   end

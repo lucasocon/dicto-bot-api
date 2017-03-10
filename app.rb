@@ -23,6 +23,7 @@ Cuba.define do
   on post do
     on 'find_term' do
       on param('text') do |text|
+        puts text
         res.headers[Rack::CONTENT_TYPE] = 'application/json'
         res.status = 200
 
