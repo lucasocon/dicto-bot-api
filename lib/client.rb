@@ -14,10 +14,10 @@ class Client
     definition = response['list'].map { |result| result['definition'] }
     {
       "response_type": "in_channel",
-      "text": definition,
+      "text": "It's 80 degrees right now.",
       "attachments": [
           {
-              "text": definition
+              "text":"Partly cloudy today and tomorrow"
           }
       ]
     }
