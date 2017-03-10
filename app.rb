@@ -6,6 +6,10 @@ Cuba.define do
     on root do
       res.write 'Hey bud!'
     end
+
+    on 'find_term.json', param('term') do |term|
+      res.write Client.call(term.strip)
+    end
   end
 
   on post do
